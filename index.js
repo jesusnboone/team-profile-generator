@@ -5,6 +5,10 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern')
 
 function Team() {
+    let TeamData = [];
+    if (!TeamData) {
+        TeamData = [];
+    }
     inquirer
     .prompt([
         {
@@ -42,12 +46,25 @@ function Team() {
                     type: 'number',
                     name: 'officeNumber',
                     message: 'Please enter the office number of this manager.'
+                },
+                {
+                    type: 'confirm',
+                    name: 'confirmAddEmployee',
+                    message: 'Would you like to enter another employee?',
+                    default: false
                 })
-                .then(({officeNumber}) => {
-                    this.employee.officeNumber = officeNumber
+                .then(({officeNumber, confirmAddEmployee}) => {
+
+                    if (confirmAddEmployee === true) {
+                        return Team();
+                    }
+                    else {
+                        this.employee.officeNumber = officeNumber
             
-                    console.log(this.employee.getRole());}
-                )
+                        TeamData.push(this.employee.getRole());
+                        console.log(TeamData);
+                    }
+                })
             }
             if (position === 'Engineer') {
                 this.employee = new Engineer(name);
@@ -63,7 +80,23 @@ function Team() {
                 .then(({github}) => {
                     this.employee.github = github
             
-                    console.log(this.employee.getRole());}
+                    TeamData.push(this.employee.getRole());}
+                )
+                inquirer
+                .prompt({
+                    type: 'confirm',
+                    name: 'confirmAddEmployee',
+                    message: 'Would you like to enter another employee?',
+                    default: false
+                })
+                .then(({confirmAddEmployee}) => {
+                    if (confirmAddEmployee === true) {
+                        return Team();
+                    }
+                    else {
+                        console.log(TeamData);
+                    }
+                }
                 )
             }
             if (position === 'Intern') {
@@ -80,7 +113,23 @@ function Team() {
                 .then(({school}) => {
                     this.employee.school = school
             
-                    console.log(this.employee.getRole());}
+                    TeamData.push(this.employee.getRole());}
+                )
+                inquirer
+                .prompt({
+                    type: 'confirm',
+                    name: 'confirmAddEmployee',
+                    message: 'Would you like to enter another employee?',
+                    default: false
+                })
+                .then(({confirmAddEmployee}) => {
+                    if (confirmAddEmployee === true) {
+                        return Team();
+                    }
+                    else {
+                        console.log(TeamData);
+                    }
+                }
                 )
             }
         })
