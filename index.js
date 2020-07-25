@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern')
 
 function Team() {
     inquirer
@@ -44,6 +45,40 @@ function Team() {
                 })
                 .then(({officeNumber}) => {
                     this.employee.officeNumber = officeNumber
+            
+                    console.log(this.employee.getRole());}
+                )
+            }
+            if (position === 'Engineer') {
+                this.employee = new Engineer(name);
+                this.employee.id = id;
+                this.employee.email = email;
+                this.employee.role = position;
+                inquirer
+                .prompt({
+                    type: 'text',
+                    name: 'github',
+                    message: 'Please enter the github username of this engineer.'
+                })
+                .then(({github}) => {
+                    this.employee.github = github
+            
+                    console.log(this.employee.getRole());}
+                )
+            }
+            if (position === 'Intern') {
+                this.employee = new Intern(name);
+                this.employee.id = id;
+                this.employee.email = email;
+                this.employee.role = position;
+                inquirer
+                .prompt({
+                    type: 'text',
+                    name: 'school',
+                    message: 'Please enter the school this intern is attending.'
+                })
+                .then(({school}) => {
+                    this.employee.school = school
             
                     console.log(this.employee.getRole());}
                 )
