@@ -46,24 +46,12 @@ function Team() {
                     type: 'number',
                     name: 'officeNumber',
                     message: 'Please enter the office number of this manager.'
-                },
-                {
-                    type: 'confirm',
-                    name: 'confirmAddEmployee',
-                    message: 'Would you like to enter another employee?',
-                    default: false
                 })
-                .then(({officeNumber, confirmAddEmployee}) => {
-
-                    if (confirmAddEmployee === true) {
-                        return Team();
-                    }
-                    else {
-                        this.employee.officeNumber = officeNumber
+                .then(({officeNumber}) => {
+                    this.employee.officeNumber = officeNumber
             
-                        TeamData.push(this.employee.getRole());
-                        console.log(TeamData);
-                    }
+                    TeamData.push(this.employee.getRole());
+                    console.log(TeamData);
                 })
             }
             if (position === 'Engineer') {
@@ -80,24 +68,9 @@ function Team() {
                 .then(({github}) => {
                     this.employee.github = github
             
-                    TeamData.push(this.employee.getRole());}
-                )
-                inquirer
-                .prompt({
-                    type: 'confirm',
-                    name: 'confirmAddEmployee',
-                    message: 'Would you like to enter another employee?',
-                    default: false
+                    TeamData.push(this.employee.getRole());
+                    console.log(TeamData);
                 })
-                .then(({confirmAddEmployee}) => {
-                    if (confirmAddEmployee === true) {
-                        return Team();
-                    }
-                    else {
-                        console.log(TeamData);
-                    }
-                }
-                )
             }
             if (position === 'Intern') {
                 this.employee = new Intern(name);
@@ -112,46 +85,11 @@ function Team() {
                 })
                 .then(({school}) => {
                     this.employee.school = school
-            
-                    TeamData.push(this.employee.getRole());}
-                )
-                inquirer
-                .prompt({
-                    type: 'confirm',
-                    name: 'confirmAddEmployee',
-                    message: 'Would you like to enter another employee?',
-                    default: false
+                    TeamData.push(this.employee.getRole());
+                    console.log(TeamData);
                 })
-                .then(({confirmAddEmployee}) => {
-                    if (confirmAddEmployee === true) {
-                        return Team();
-                    }
-                    else {
-                        console.log(TeamData);
-                    }
-                }
-                )
             }
         })
-
-/*    .then(({ name, id, email, position, officeNumber}) => {
-        if (position === 'Manager') {
-        this.employee = new Manager(name);
-        this.employee.id = id;
-        this.employee.email = email;
-        this.employee.role = position;
-        this.employee.officeNumber = officeNumber
-
-        console.log(this.employee.getRole());}
-    })
-
-    /*.then(({ name, id, email }) => {
-        this.employee = new Employee(name);
-        this.employee.id = id;
-        this.employee.email = email;
-
-        console.log(this.employee.getRole());
-    })*/
 }
 
 Team();
