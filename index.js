@@ -2,7 +2,8 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern')
+const Intern = require('./lib/Intern');
+const { prompt } = require('inquirer');
 
 function Team() {
     let TeamData = [];
@@ -52,6 +53,18 @@ function Team() {
             
                     TeamData.push(this.employee.getRole());
                     console.log(TeamData);
+                    inquirer
+                    prompt({
+                        type: 'confirm',
+                        name: 'confirmNewEmployee',
+                        message: 'Would you like to add another Employee to your team?',
+                        default: true
+                    })
+                    .then(({confirmNewEmployee}) => {
+                        if (confirmNewEmployee === true) {
+                            return Team();
+                        }
+                    })
                 })
             }
             if (position === 'Engineer') {
@@ -70,6 +83,18 @@ function Team() {
             
                     TeamData.push(this.employee.getRole());
                     console.log(TeamData);
+                    inquirer
+                    prompt({
+                        type: 'confirm',
+                        name: 'confirmNewEmployee',
+                        message: 'Would you like to add another Employee to your team?',
+                        default: true
+                    })
+                    .then(({confirmNewEmployee}) => {
+                        if (confirmNewEmployee === true) {
+                            return Team();
+                        }
+                    })
                 })
             }
             if (position === 'Intern') {
@@ -87,9 +112,23 @@ function Team() {
                     this.employee.school = school
                     TeamData.push(this.employee.getRole());
                     console.log(TeamData);
+                    inquirer
+                    prompt({
+                        type: 'confirm',
+                        name: 'confirmNewEmployee',
+                        message: 'Would you like to add another Employee to your team?',
+                        default: true
+                    })
+                    .then(({confirmNewEmployee}) => {
+                        if (confirmNewEmployee === true) {
+                            return Team();
+                        }
+                    })
                 })
             }
         })
+
+
 }
 
 Team();
