@@ -5,8 +5,9 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const { prompt } = require('inquirer');
+const fs = require('fs');
 let teamData = [];
-function Team() {
+function team() {
 
     inquirer
     .prompt([
@@ -46,7 +47,6 @@ function Team() {
                 })
                 .then(({officeNumber}) => {
                     this.employee.officeNumber = officeNumber
-                    
                     teamData.push(this.employee);
                     console.log(teamData);
                     inquirer
@@ -58,7 +58,7 @@ function Team() {
                     })
                     .then(({confirmNewEmployee}) => {
                         if (confirmNewEmployee === true) {
-                            return Team();
+                            return team();
                         }
                     })
                 })
@@ -74,7 +74,6 @@ function Team() {
                 })
                 .then(({github}) => {
                     this.employee.github = github
-            
                     teamData.push(this.employee);
                     console.log(teamData);
                     inquirer
@@ -86,7 +85,7 @@ function Team() {
                     })
                     .then(({confirmNewEmployee}) => {
                         if (confirmNewEmployee === true) {
-                            return Team();
+                            return team();
                         }
                     })
                 })
@@ -113,7 +112,7 @@ function Team() {
                     })
                     .then(({confirmNewEmployee}) => {
                         if (confirmNewEmployee === true) {
-                            return Team();
+                            return team();
                         }
                     })
                 })
@@ -123,4 +122,4 @@ function Team() {
 
 }
 
-Team();
+team();
