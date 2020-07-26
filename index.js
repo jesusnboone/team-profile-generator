@@ -1,15 +1,13 @@
+
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const { prompt } = require('inquirer');
-
+let teamData = [];
 function Team() {
-    let TeamData = [];
-    if (!TeamData) {
-        TeamData = [];
-    }
+
     inquirer
     .prompt([
         {
@@ -38,9 +36,7 @@ function Team() {
     ])
         .then(({ name, id, email, position }) => {
             if (position === 'Manager') {
-                this.employee = new Manager(name);
-                this.employee.id = id;
-                this.employee.email = email;
+                this.employee = new Manager(name, id, email)
                 this.employee.role = position;
                 inquirer
                 .prompt({
@@ -50,9 +46,9 @@ function Team() {
                 })
                 .then(({officeNumber}) => {
                     this.employee.officeNumber = officeNumber
-            
-                    TeamData.push(this.employee.getRole());
-                    console.log(TeamData);
+                    
+                    teamData.push(this.employee);
+                    console.log(teamData);
                     inquirer
                     prompt({
                         type: 'confirm',
@@ -68,9 +64,7 @@ function Team() {
                 })
             }
             if (position === 'Engineer') {
-                this.employee = new Engineer(name);
-                this.employee.id = id;
-                this.employee.email = email;
+                this.employee = new Engineer(name, id, email);
                 this.employee.role = position;
                 inquirer
                 .prompt({
@@ -81,8 +75,8 @@ function Team() {
                 .then(({github}) => {
                     this.employee.github = github
             
-                    TeamData.push(this.employee.getRole());
-                    console.log(TeamData);
+                    teamData.push(this.employee);
+                    console.log(teamData);
                     inquirer
                     prompt({
                         type: 'confirm',
@@ -98,9 +92,7 @@ function Team() {
                 })
             }
             if (position === 'Intern') {
-                this.employee = new Intern(name);
-                this.employee.id = id;
-                this.employee.email = email;
+                this.employee = new Intern(name, id, email);
                 this.employee.role = position;
                 inquirer
                 .prompt({
@@ -110,8 +102,8 @@ function Team() {
                 })
                 .then(({school}) => {
                     this.employee.school = school
-                    TeamData.push(this.employee.getRole());
-                    console.log(TeamData);
+                    teamData.push(this.employee);
+                    console.log(teamData);
                     inquirer
                     prompt({
                         type: 'confirm',
